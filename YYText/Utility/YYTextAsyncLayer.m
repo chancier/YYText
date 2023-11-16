@@ -155,7 +155,10 @@ static dispatch_queue_t YYTextAsyncLayerGetReleaseQueue() {
                 CGColorRelease(backgroundColor);
                 return;
             }
-            if (CGSizeEqualToSize(size, CGSizeZero)) return;
+            if (self.bounds.size.width<=0 || self.bounds.size.height<=0) {
+                self.contents = nil;
+                return;
+            }
             UIGraphicsBeginImageContextWithOptions(size, opaque, scale);
             CGContextRef context = UIGraphicsGetCurrentContext();
             if (opaque && context) {
